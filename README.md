@@ -71,3 +71,4 @@ The Live Server is configured to:
 - The server will automatically reload when you save changes to HTML, CSS, or JavaScript files
 - You can access your site from other devices on the same network
 - To stop the server, click the "Port: 5500" button in VS Code's status bar
+# chromabelleart
