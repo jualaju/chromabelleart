@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Persistence of Memory - Chromabelle</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --ivory: #F9F6F1;
+            --charcoal: #2D2D2D;
+            --burnt-umber: #8C5E3C;
+            --beige-gold: #B89B7B;
+            --deep-brown: #6B4226;
+        }
+
+        body {
+            background: linear-gradient(rgba(249, 246, 241, 0.85), rgba(249, 246, 241, 0.85));
+            background-color: var(--ivory);
+            color: var(--charcoal);
+            font-family: 'Lato', sans-serif;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('images/bg.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.25;
+            z-index: -1;
+        }
+
+        .artwork-container {
+            animation: fadeIn 1s ease-in;
+            padding: 40px 0;
+        }
+
+        .artwork-image {
+            max-width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .artwork-image:hover {
+            transform: scale(1.02);
+        }
+
+        .artwork-details {
+            background-color: var(--ivory);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .artwork-title {
+            color: var(--deep-brown);
+            border-bottom: 2px solid var(--burnt-umber);
+            display: inline-block;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+        }
+
+        .similar-works {
+            margin-top: 40px;
+        }
+
+        .similar-card {
+            transition: transform 0.3s ease;
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            background-color: var(--ivory);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .similar-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .similar-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .similar-card:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Footer Styles */
+        .footer {
+            background: linear-gradient(135deg, var(--charcoal) 0%, #1a1a1a 100%);
+            color: var(--ivory);
+            padding: 60px 0 20px;
+            position: relative;
+            margin-top: 60px;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, var(--burnt-umber), var(--beige-gold));
+        }
+
+        .footer h5 {
+            color: var(--beige-gold);
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .footer p, .footer a {
+            color: #b8b8b8;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: var(--beige-gold);
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            display: inline-block;
+            padding: 5px 0;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            border-bottom-color: var(--beige-gold);
+            transform: translateX(5px);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--burnt-umber), var(--beige-gold));
+            color: var(--ivory);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            font-size: 18px;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(140, 94, 60, 0.4);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            margin-top: 40px;
+            padding-top: 20px;
+            text-align: center;
+            color: #888;
+        }
+
+        .footer-bottom p {
+            margin: 0;
+        }
+
+        /* Mobile responsive footer */
+        @media (max-width: 768px) {
+            .footer {
+                text-align: center;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                        url('images/bg.png');
+            background-attachment: fixed;
+            background-size: cover;
+            padding: 60px 0;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .hero-title {
+            color: var(--ivory);
+            backdrop-filter: blur(5px);
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 1rem;
+            border-radius: 15px;
+            display: inline-block;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: var(--charcoal);">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Chromabelle</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#gallery">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#artists">Artists</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="signup.html">Sign Up</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="text-center hero-title">The Persistence of Memory</h1>
+        </div>
+    </section>
+
+    <div class="container artwork-container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="row">
+                    <div class="col-lg-6 mb-4">
+                        <img src="images/salvador dali/The_Persistence_of_Memory.jpg" alt="The Persistence of Memory" class="artwork-image">
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="artwork-details">
+                            <h2 class="artwork-title">The Persistence of Memory</h2>
+                            <p class="lead">Salvador Dalí</p>
+                            <p><strong>Year:</strong> 1931</p>
+                            <p><strong>Location:</strong> Museum of Modern Art, New York</p>
+                            <p class="mt-4">The Persistence of Memory is one of Salvador Dalí's most recognizable works and a masterpiece of Surrealism. The soft, melting pocket watches suggest that our conventional view of time is meaningless in the realm of dreams and the unconscious mind.</p>
+                            <p>The barren landscape of Dalí's native Catalonia provides the backdrop for this dreamlike scene. The ants and flies that appear in the painting are symbols that recur throughout Dalí's work, representing decay and decomposition.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Similar Works -->
+        <div class="similar-works">
+            <h3 class="text-center mb-4" style="color: var(--deep-brown);">Similar Works</h3>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <a href="#" class="text-decoration-none">
+                        <div class="similar-card card">
+                            <img src="images/salvador dali/Dream_Caused_by_the_Flight_of_a_Bumblebee_around_a_Pomegranate_a_Second_Before_Awakening.jpg.jpeg" class="card-img-top" alt="Dream Caused by the Flight of a Bumblebee">
+                            <div class="card-body">
+                                <h5 class="card-title">Dream Caused by the Flight of a Bumblebee</h5>
+                                <p class="card-text">Salvador Dalí, 1944</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <a href="#" class="text-decoration-none">
+                        <div class="similar-card card">
+                            <img src="images/salvador dali/Metamorphosis_of_Narcissus.jpg.jpeg" class="card-img-top" alt="Metamorphosis of Narcissus">
+                            <div class="card-body">
+                                <h5 class="card-title">Metamorphosis of Narcissus</h5>
+                                <p class="card-text">Salvador Dalí, 1937</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <a href="#" class="text-decoration-none">
+                        <div class="similar-card card">
+                            <img src="images/salvador dali/Untitled.jpeg" class="card-img-top" alt="Another Dalí Work">
+                            <div class="card-body">
+                                <h5 class="card-title">Untitled Work</h5>
+                                <p class="card-text">Salvador Dalí</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Chromabelle</h5>
+                    <p>Your digital gateway to the world of art. Discover, learn, and appreciate masterpieces from the comfort of your home.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="artworks.html">Artworks</a></li>
+                        <li><a href="artists.html">Artists</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Follow Us</h5>
+                    <div class="social-links">
+                        <a href="#" target="_blank" aria-label="Follow us on Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" target="_blank" aria-label="Follow us on Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" target="_blank" aria-label="Follow us on Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" target="_blank" aria-label="Follow us on Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Chromabelle. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

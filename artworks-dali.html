@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salvador Dalí Artworks - Chromabelle</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --background: #fafafa;
+            --text: #2d2d2d;
+            --primary: #b1976b;
+            --secondary: #e8dcc6;
+            --muted: #f5f2ed;
+            --border: #e6ddd4;
+            --card: #ffffff;
+            --gold-gradient: linear-gradient(135deg, #b1976b, #d4af8c);
+            --shadow-light: 0 2px 20px rgba(0,0,0,0.1);
+            --shadow-medium: 0 4px 30px rgba(0,0,0,0.15);
+            --border-radius: 12px;
+            --primary-color: #b1976b;
+            --secondary-color: #e8dcc6;
+            --accent-color: #b1976b;
+            --text-dark: #2d2d2d;
+            --text-light: #666;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--background);
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('images/bg.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
+            z-index: -1;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-color) !important;
+            text-decoration: none;
+        }
+
+        .nav-link {
+            color: var(--text-dark) !important;
+            font-weight: 500;
+            margin: 0 0.5rem;
+            padding: 0.5rem 1rem !important;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background-color: var(--secondary-color);
+            color: var(--accent-color) !important;
+        }
+
+        .nav-link.active {
+            background-color: var(--accent-color);
+            color: var(--white) !important;
+        }
+
+        .page-header {
+            background: linear-gradient(
+                135deg,
+                rgba(177, 151, 107, 0.7) 0%,
+                rgba(45, 45, 45, 0.6) 100%
+            ),
+            url('images/title cover.jpeg');
+            background-size: cover;
+            background-position: center;
+            color: var(--card);
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .page-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .artworks-section {
+            padding: 80px 0;
+            background: rgba(255, 255, 255, 0.9);
+            position: relative;
+            z-index: 1;
+        }
+
+        .artwork-item {
+            background: var(--card);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-light);
+            transition: all 0.3s ease;
+            height: 100%;
+            margin-bottom: 30px;
+            border: 1px solid var(--border);
+        }
+
+        .artwork-item:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .artwork-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .artwork-item:hover .artwork-image {
+            transform: scale(1.05);
+        }
+
+        .artwork-content {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+
+
+        .artwork-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .artwork-artist {
+            font-size: 1.1rem;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .artwork-year {
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .artwork-description {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .artwork-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .artwork-medium {
+            background: var(--secondary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .artwork-dimensions {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Chromabelle</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="artworks.html">Artworks</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="artists.html">Artists</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="signup.html">Sign Up</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">Salvador Dalí Artworks</h1>
+            <p class="page-subtitle">Explore the surrealist masterpieces of the Spanish artist</p>
+        </div>
+    </section>
+
+    <!-- Artworks Section -->
+    <section class="artworks-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-xl-4">
+                    <div class="artwork-item">
+                        <img src="images/salvador dali/The_Persistence_of_Memory.jpg" alt="The Persistence of Memory" class="artwork-image">
+                        <div class="artwork-content">
+                            <h3 class="artwork-title">The Persistence of Memory</h3>
+                            <p class="artwork-artist">Salvador Dalí</p>
+                            <p class="artwork-year">1931</p>
+                            <p class="artwork-description">One of Dalí's most recognizable works, featuring melting clocks draped over a barren landscape, symbolizing the relativity of time and space.</p>
+                            <div class="artwork-details">
+                                <span class="artwork-medium">Oil on Canvas</span>
+                                <span class="artwork-dimensions">24 × 33 cm</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-xl-4">
+                    <div class="artwork-item">
+                        <img src="images/salvador dali/Metamorphosis_of_Narcissus.jpg.jpeg" alt="Metamorphosis of Narcissus" class="artwork-image">
+                        <div class="artwork-content">
+                            <h3 class="artwork-title">Metamorphosis of Narcissus</h3>
+                            <p class="artwork-artist">Salvador Dalí</p>
+                            <p class="artwork-year">1937</p>
+                            <p class="artwork-description">A surrealist interpretation of the Greek myth of Narcissus, showing the transformation of the figure into a hand holding an egg.</p>
+                            <div class="artwork-details">
+                                <span class="artwork-medium">Oil on Canvas</span>
+                                <span class="artwork-dimensions">51.2 × 78.1 cm</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-xl-4">
+                    <div class="artwork-item">
+                        <img src="images/salvador dali/Dream_Caused_by_the_Flight_of_a_Bumblebee_around_a_Pomegranate_a_Second_Before_Awakening.jpg.jpeg" alt="Dream Caused by the Flight of a Bumblebee" class="artwork-image">
+                        <div class="artwork-content">
+                            <h3 class="artwork-title">Dream Caused by the Flight of a Bumblebee</h3>
+                            <p class="artwork-artist">Salvador Dalí</p>
+                            <p class="artwork-year">1944</p>
+                            <p class="artwork-description">A complex surrealist composition depicting Gala's dream, filled with symbolic elements and Dalí's characteristic dreamlike imagery.</p>
+                            <div class="artwork-details">
+                                <span class="artwork-medium">Oil on Canvas</span>
+                                <span class="artwork-dimensions">51 × 40.5 cm</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

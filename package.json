@@ -1,0 +1,17 @@
+{
+  "name": "chromabelle",
+  "version": "1.0.0",
+  "description": "Art gallery website with Go Live functionality",
+  "main": "index.html",
+  "scripts": {
+    "start": "live-server --port=5500 --host=localhost --open=/index.html",
+    "dev": "live-server --port=5500 --host=localhost --open=/index.html",
+    "live": "live-server --port=5500 --host=localhost --open=/index.html"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  },
+  "keywords": ["art", "gallery", "html", "live-server"],
+  "author": "",
+  "license": "MIT"
+}
